@@ -2,12 +2,13 @@ package server
 
 import (
 	"fmt"
-	"github.com/HFO4/gbc-in-cloud/driver"
-	"github.com/HFO4/gbc-in-cloud/gb"
-	"github.com/logrusorgru/aurora"
 	"log"
 	"net"
 	"strconv"
+
+	"github.com/HFO4/gbc-in-cloud/driver"
+	"github.com/HFO4/gbc-in-cloud/gb"
+	"github.com/logrusorgru/aurora"
 )
 
 // Player Single player model
@@ -229,7 +230,7 @@ func (player *Player) SelectPlayer() int {
 
 func (player *Player) Instruction() int {
 	ret := "Here's the key instruction, press " + fmt.Stringer(aurora.Gray(1-1, "Enter").BgGray(24-1)).String() + " key to enter the game, " + fmt.Stringer(aurora.Gray(1-1, " Q ").BgGray(24-1)).String() + " to quit the game.\r\n\r\n"
-	ret += "                      __________________________\r\n" + "                     |OFFo oON                  |\r\n" + "                     | .----------------------. |\r\n" + "                     | |  .----------------.  | |\r\n" + "                     | |  |                |  | |\r\n" + "                     | |))|                |  | |\r\n" + "                     | |  |                |  | |\r\n" + "                     | |  |                |  | |\r\n" + "                     | |  |                |  | |\r\n" + "                     | |  |                |  | |\r\n" + "                     | |  |                |  | |\r\n" + "                     | |  '----------------'  | |\r\n" + "                     | |__GAME BOY____________/ |\r\n" + "    Keyboard:Up↑ <--------+     ________        |\r\n" + "                     |    +    (Nintendo)       |\r\n" + "                     |  _| |_   \"\"\"\"\"\"\"\"   .-.  |\r\n" + "  Keyboard:Left← <----+[_   _]---+    .-. ( +---------> Keyboard:Z\r\n" + "                     |   |_|     |   (   ) '-'  |\r\n" + "                     |    +      |    '-+   A   |\r\n" + "  Keyboard:Down↓ <--------+ +----+     B+-------------> Keyboard:X\r\n" + "                     |      |   ___   ___       |\r\n" + "                     |      |  (___) (___)  ,., |\r\n" + "Keyboard:Right→ <-----------+ select st+rt ;:;: |\r\n" + "                     |           +     |  ,;:;' /\r\n" + "                  jgs|           |     | ,:;:'.'\r\n" + "                     '-----------------------`\r\n" + "                                 |     |\r\n" + "           Keyboard:Backspace <--+     +-> Keyboard:Enter\r\n"
+	ret += "                      __________________________\r\n" + "                     |OFFo oON                  |\r\n" + "                     | .----------------------. |\r\n" + "                     | |  .----------------.  | |\r\n" + "                     | |  |                |  | |\r\n" + "                     | |))|                |  | |\r\n" + "                     | |  |                |  | |\r\n" + "                     | |  |                |  | |\r\n" + "                     | |  |                |  | |\r\n" + "                     | |  |                |  | |\r\n" + "                     | |  |                |  | |\r\n" + "                     | |  '----------------'  | |\r\n" + "                     | |__GAME BOY____________/ |\r\n" + "    Keyboard:Up↑ <--------+     ________        |\r\n" + "                     |    +    (Nintendo)       |\r\n" + "                     |  _| |_   \"\"\"\"\"\"\"\"   .-.  |\r\n" + "  Keyboard:Left← <----+[_   _]---+    .-. ( +---------> Keyboard:X\r\n" + "                     |   |_|     |   (   ) '-'  |\r\n" + "                     |    +      |    '-+   A   |\r\n" + "  Keyboard:Down↓ <--------+ +----+     B+-------------> Keyboard:Z\r\n" + "                     |      |   ___   ___       |\r\n" + "                     |      |  (___) (___)  ,., |\r\n" + "Keyboard:Right→ <-----------+ select st+rt ;:;: |\r\n" + "                     |           +     |  ,;:;' /\r\n" + "                  jgs|           |     | ,:;:'.'\r\n" + "                     '-----------------------`\r\n" + "                                 |     |\r\n" + "           Keyboard:Backspace <--+     +-> Keyboard:Enter\r\n"
 	// Clean screen
 	_, err := player.Conn.Write([]byte("\033[2J\033[H" + ret))
 	if err != nil {
@@ -286,7 +287,7 @@ func (player *Player) Serve() {
 	}
 
 	// Set the display driver to TELNET
-	go player.Emulator.DisplayDriver.Run(player.Emulator.DrawSignal)
+	go player.Emulator.DisplayDriver.Run(player.Emulator.DrawSignal, func() {})
 	player.Emulator.Init((*player.GameList)[player.Selected].Path)
 	go player.Emulator.Run()
 

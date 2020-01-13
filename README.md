@@ -25,6 +25,7 @@ go build -o gbdotlive main.go
 
 ```
 Usage of gbdotlive:
+  -G    Play specific game in Fyne GUI mode
   -c config
         Set the game option list config file path
   -d    Use Debugger in GUI mode
@@ -45,7 +46,7 @@ Usage of gbdotlive:
 Play a specified ROM file in GUI mode:
 
 ```
-gbdotlive -r "Tetris.gb" 
+gbdotlive -G -r "Tetris.gb" 
 ```
 
 ### Set up a Cloud Gaming server
@@ -117,8 +118,8 @@ LCD:100
 |  <kbd>↓</kbd> | Down    |
 |   <kbd>←</kbd> | Left    |
 |   <kbd>→</kbd>  | Right   |
-|    <kbd>X</kbd>  | B       |
-|     <kbd>Z</kbd>     | A       |
+|    <kbd>X</kbd>  | A      |
+|     <kbd>Z</kbd>     | B      |
 
 ## Features & TODOs
 
@@ -129,6 +130,7 @@ LCD:100
 - [x] Graphics emulation
 - [x] Cloud gaming
 - [x] ROM debugger
+- [x] Game saving & restore in cartridge level
 
 There are still many TODOs：
 
@@ -137,7 +139,6 @@ There are still many TODOs：
 - [ ] Sound simulation is incomplete, still got differences compared to the Gameboy real machine
 - [ ] Sprite priority issue (see `Wario Land II` and `Metroid II: Return of Samus`)
 - [ ] Failed to pass Blargg's instruction timing test
-- [ ] Game saving & restore in cartridge level
 - [ ] Game saving & restore in emulator level
 - [ ] Multiplayer support in cloud gaming mode
 
